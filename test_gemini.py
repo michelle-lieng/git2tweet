@@ -27,7 +27,11 @@ model = genai.GenerativeModel(
 # commits = """initial commit (321368c)
 # simple initial layout + set up basic code to test the twitter api
 # """
-commits = "Integrated follow up github repo tweet - enabled now that the following tweet in the thread is the github repo link of the repo updated"
+#commits = "Integrated follow up github repo tweet - enabled now that the following tweet in the thread is the github repo link of the repo updated"
+commits = """
+1. create CHANGELOG.md
+2. created test for llm to generate tweet
+"""
 daynumber = 2
 project_context="""
 Git2tweet is a github to twitter bot that automatically scans my github repo for latest commits,
@@ -35,7 +39,7 @@ creates a viral twitter post for the #100daysofcode challenge and posts it.
 """
 
 # Send a test prompt
-prompt = prompt = f"""
+prompt = f"""
 You are an expert viral Twitter copywriter.
 
 Commits:
