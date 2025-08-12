@@ -15,11 +15,10 @@ class TwitterClient:
 
     def post_tweet(self, text: str):
         resp = self.client.create_tweet(text=text)
-        return resp.data["id"], resp.data["text"]
+        return resp.data["id"]
 
 # Usage
 if __name__ == "__main__":
     twitter = TwitterClient()
-    tweet_id, tweet_text = twitter.post_tweet("Test tweet from Tweepy v2!")
+    tweet_id = twitter.post_tweet("Test tweet from Tweepy v2!")
     print(tweet_id)
-    print(tweet_text)
