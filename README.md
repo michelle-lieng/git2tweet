@@ -1,6 +1,6 @@
 # Github to Twitter Bot
 
-My current usecase is to set up a bot that can automatically summarise all my latest github changes and format a post for twitter for my #100daysofcode challenge.
+My current usecase is to set up a bot that can automatically summarise all my latest github changes and use an llm to generate a viral tweet for my #100daysofcode challenge.
 
 ## Setting up Twitter/X API Keys
 
