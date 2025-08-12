@@ -20,7 +20,7 @@ class TwitterPromptTemplates:
 You are an expert viral Twitter copywriter.
 
 You will look at my commits + project context and summarise ONLY what I accomplished today 
-into a high-quality post for my #100DaysOfCode challenge.
+into a high-quality post for my #100DaysOfCode challenge. Also give a bit of context of the project too.
 
 IMPORTANT:
 - DO NOT mention or hint at future plans, next steps, or what I will do next.
