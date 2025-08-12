@@ -18,4 +18,4 @@ To post tweets, you need API keys and access tokens from the Twitter Developer P
 1. Create config.yaml to include all your local repos to track as per structure of config.yaml.example
 2. Set up twitter api keys + get gemini key and put in an .env file as per structure of .env.example
 3. Create virtual env and download requirements.txt
-4. Run main.py
+4. Run src/main.py
