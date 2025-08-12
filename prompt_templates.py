@@ -1,3 +1,8 @@
+"""
+This is where all the llm prompt templates for our
+tweet generator will be.
+"""
+
 class TwitterPromptTemplates:
     """
     This prompt template is specifically for the #100daysofcode 
