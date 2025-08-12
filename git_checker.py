@@ -1,5 +1,6 @@
 import subprocess
 from pathlib import Path
+from pprint import pprint
 
 class GitChecker:
     def __init__(self, repo_path: str = "."):
@@ -32,13 +33,30 @@ class GitChecker:
         commits = []
         for line in out.splitlines():
             subject, short_sha, body = (line.split("||") + ["", ""])[:3]
-            commits.append({
-                "subject": subject.strip(),
-                "short_sha": short_sha,
-                "body": body.strip()
-            })
-        return commits
+            if short_sha: #only commit if this is full
+                commit = {
+                    "short_sha": short_sha,
+                    "subject": subject.strip()
+                }
+                if body.strip():
+                    commit["body"] = body.strip()
+                commits.append(commit)
+        return commits[::-1]
     
+    def reformat_commits_for_llm(self, commits):
+        """
+        Reformats the commits list into a string suitable for LLM prompts.
+        Each commit is shown as:
+        1. subject
+        Description: body (if present)
+        """
+        lines = []
+        for i, c in enumerate(commits, start=1):  # latest changes shown first
+            lines.append(f"{i}. {c['subject']}")
+            if c.get("body"):
+                lines.append(f"   Description: {c['body']}")
+        return "\n".join(lines)
+                         
     def get_repo_context():
         # TO DO LATER: CONNECT TO GITHUB API TO GET REPO ABOUT SECTION
         pass
@@ -46,20 +64,11 @@ class GitChecker:
 if __name__ == "__main__":
     #last_sha = "dc77e8e"
     last_sha = ""
-
     git_checker = GitChecker()
 
-    if last_sha:
-        commits = git_checker.get_commits_since(last_sha=last_sha)
-    else:
-        commits = git_checker.get_commits_since()
-
+    commits = git_checker.get_commits_since(last_sha=last_sha)
     if commits:
-        print("\nCommits since last:")
-        for i,c in enumerate(commits[::-1], start=1): #latest changes shown first
-            #print(f"- {c['subject']} ({c['short_sha']})")
-            print(f"{i}. {c['subject']}")
-            if c['body']:
-                print(f"  Description: {c['body']}")
+        pprint(commits)
+        print(git_checker.reformat_commits_for_llm(commits))
     else:
         print("No new commits since last.")
